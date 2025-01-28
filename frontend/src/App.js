@@ -12,11 +12,17 @@ function App() {
     section4: false,
   });
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const toggleSection = (section) => {
     setExpandedSections((prevState) => ({
       ...prevState,
       [section]: !prevState[section],
     }));
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen((prevState) => !prevState);
   };
 
   let ref = React.useRef();
@@ -35,15 +41,20 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <nav className="App-nav">
+        <button className="App-menu-button" onClick={toggleMenu}>
+          ☰
+        </button>
+        <input type="text" className="App-search" placeholder="Search..." />
+      </header>
+      {menuOpen && (
+        <nav className="App-nav-overlay">
           <ul>
             <li><a {...homeLinkProps} ref={homeRef}>Home</a></li>
             <li><a {...aboutLinkProps} ref={aboutRef}>About</a></li>
             <li><a {...contactLinkProps} ref={contactRef}>Contact</a></li>
           </ul>
         </nav>
-        <input type="text" className="App-search" placeholder="Search..." />
-      </header>
+      )}
       <img src="https://placehold.co/1200x150" alt="Header" className="App-header-image" />
       <main className="App-main">
         <button {...buttonProps} ref={ref} className="App-button">
