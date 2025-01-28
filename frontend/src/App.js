@@ -25,9 +25,20 @@ function App() {
     setMenuOpen((prevState) => !prevState);
   };
 
+  const handleClick = async () => {
+    try {
+      const response = await fetch('/api/hello');
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert('Failed to fetch data');
+    }
+  };
+
   let ref = React.useRef();
   let { buttonProps } = useButton({
-    onPress: () => alert('Hello World!')
+    onPress: handleClick
   }, ref);
 
   let homeRef = React.useRef();

@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -15,8 +18,10 @@ public class DemoApplication {
   @RestController
   class HelloController {
     @GetMapping("/api/hello")
-    public String hello() {
-      return "Hello from Spring Boot!";
+    public Map<String, String> hello() {
+      Map<String, String> response = new HashMap<>();
+      response.put("message", "Hello from Spring Boot!");
+      return response;
     }
   }
 }
