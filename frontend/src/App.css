@@ -160,19 +160,19 @@ body {
 }
 
 .App-section-1 .App-section-label {
-  background-color: #007bff;
+  background-color: #dc4b25;
 }
 
 .App-section-2 .App-section-label {
-  background-color: #ff0000;
+  background-color: #2a5496;
 }
 
 .App-section-3 .App-section-label {
-  background-color: #ffa500;
+  background-color: #eab24e;
 }
 
 .App-section-4 .App-section-label {
-  background-color: #008000;
+  background-color: #30ceda;
 }
 
 .App-section-label {
@@ -181,15 +181,20 @@ body {
   color: white;
   text-align: center;
   border-radius: 0;
-  transition: font-size 0.3s ease;
+  transition: font-size 0.3s ease, height 0.3s ease, padding-left 0.3s ease, justify-content 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-section-label.collapsed {
-  font-size: 24px;
+  font-size: 32px; /* Larger font size for collapsed */
+  height: 80px; /* Larger height for collapsed */
 }
 
 .App-section-label.expanded {
-  font-size: 16px;
+  font-size: 16px; /* Smaller font size for expanded */
+  height: 20px; /* One-fourth the height of collapsed */
 }
 
 .App-cards {
