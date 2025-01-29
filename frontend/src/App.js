@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { useButton } from '@react-aria/button';
 import './App.css';
@@ -80,10 +80,40 @@ function Page1() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const announcementRef = useRef(null);
 
   const toggleMenu = () => {
     setMenuOpen((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const announcement = announcementRef.current;
+    const scrollWidth = announcement.scrollWidth;
+    const containerWidth = announcement.parentElement.offsetWidth;
+
+    const animateScroll = () => {
+      announcement.style.transform = `translateX(${containerWidth}px)`;
+      announcement.style.transition = 'none';
+
+      requestAnimationFrame(() => {
+        announcement.style.transform = `translateX(-${scrollWidth}px)`;
+        announcement.style.transition = `transform ${scrollWidth / 50}s linear`;
+      });
+    };
+
+    const resetScroll = () => {
+      announcement.style.transform = `translateX(${containerWidth}px)`;
+      announcement.style.transition = 'none';
+    };
+
+    resetScroll();
+    announcement.addEventListener('transitionend', animateScroll);
+    animateScroll();
+
+    return () => {
+      announcement.removeEventListener('transitionend', animateScroll);
+    };
+  }, []);
 
   return (
     <Router>
@@ -97,6 +127,11 @@ function App() {
               </button>
               <input type="text" className="App-search" placeholder="Search..." />
             </header>
+            <div className="App-announcement">
+              <div className="App-announcement-content" ref={announcementRef}>
+              This is an important announcement scrolling from left to right. This is an important announcement scrolling from left to right. This is an important announcement scrolling from left to right. This is an important announcement scrolling from left to right.
+              </div>
+            </div>
             {menuOpen && (
               <nav className="App-nav-overlay">
                 <ul>

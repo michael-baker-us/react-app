@@ -21,7 +21,7 @@ html, body {
 
 .main-content {
   flex: 1;
-  padding-top: 60px; /* Adjust this value based on the new height of your header */
+  padding-top: 80px; /* Adjust this value based on the height of your header and announcement */
 }
 
 .footer {
@@ -60,6 +60,33 @@ html, body {
   left: 0;
   width: 100%;
   z-index: 1000; /* Ensure it is above other content */
+}
+
+.App-announcement {
+  background-color: #ffeb3b; /* Yellow background for the announcement */
+  color: #000; /* Black text color */
+  padding: 5px 0; /* Small padding */
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 60px; /* Adjust this value based on the height of your header */
+  left: 0;
+  z-index: 999; /* Ensure it is above other content */
+}
+
+.App-announcement-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 20s linear infinite; /* Adjust the duration as needed */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%); /* Start completely off-screen to the right */
+  }
+  100% {
+    transform: translateX(-100%); /* Move completely off-screen to the left */
+  }
 }
 
 .App-menu-button {
