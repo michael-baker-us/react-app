@@ -8,6 +8,28 @@ body {
   min-height: 100vh;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 60px; /* Adjust this value based on the new height of your header */
+}
+
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -27,13 +49,17 @@ body {
 }
 
 .App-header {
-  background-color: #fff;
-  padding: 20px;
+  background-color: #f0f0f0; /* Set background color to a different shade of white */
+  padding: 10px; /* Reduced padding to make the header smaller */
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border-bottom: 1px solid #ddd;
-  position: relative;
+  position: fixed; /* Make the header fixed */
+  top: 0; /* Position it at the top */
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it is above other content */
 }
 
 .App-menu-button {
@@ -46,7 +72,7 @@ body {
 
 .App-nav-overlay {
   position: fixed;
-  top: 80px; /* Adjust this value based on the height of your header */
+  top: 60px; /* Adjust this value based on the new height of your header */
   left: 20px;
   width: 200px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -223,14 +249,24 @@ body {
 }
 
 .App-footer {
-  background-color: #fff;
-  padding: 10px;
-  color: #333;
+  background-color: #333; /* Set background color to dark gray */
+  padding: 0px; 
+  color: #fff; /* Set text color to white for contrast */
   text-align: center;
   border-top: 1px solid #ddd;
   width: 100%;
-  flex-shrink: 0;
-  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: auto; /* Set height to auto to fit content */
+  line-height: 0px; /* Ensure text is vertically centered */
+}
+
+.extra-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  width: 100%;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

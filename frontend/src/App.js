@@ -19,27 +19,8 @@ function Home() {
     }));
   };
 
-  const handleClick = async () => {
-    try {
-      const response = await fetch('/api/hello');
-      const data = await response.json();
-      alert(data.message);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      alert('Failed to fetch data');
-    }
-  };
-
-  let ref = React.useRef();
-  let { buttonProps } = useButton({
-    onPress: handleClick
-  }, ref);
-
   return (
     <main className="App-main">
-      <button {...buttonProps} ref={ref} className="App-button">
-        Click Me
-      </button>
       {['section1', 'section2', 'section3', 'section4'].map((section, index) => (
         <div key={section} className={`App-section App-section-${index + 1}`}>
           <div
@@ -60,14 +41,39 @@ function Home() {
           )}
         </div>
       ))}
+      {/* Add more content to make the page scrollable */}
+      <div className="extra-content">
+        {[...Array(50)].map((_, index) => (
+          <p key={index}>Extra content line {index + 1}</p>
+        ))}
+      </div>
     </main>
   );
 }
 
 function Page1() {
+  const handleClick = async () => {
+    try {
+      const response = await fetch('/api/hello');
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert('Failed to fetch data');
+    }
+  };
+
+  let ref = React.useRef();
+  let { buttonProps } = useButton({
+    onPress: handleClick
+  }, ref);
+
   return (
     <main className="App-main">
       <h1>Page 1</h1>
+      <button {...buttonProps} ref={ref} className="App-button">
+        Click Me
+      </button>
     </main>
   );
 }
@@ -81,26 +87,30 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <button className="App-menu-button" onClick={toggleMenu}>
-            ☰
-          </button>
-          <input type="text" className="App-search" placeholder="Search..." />
-        </header>
-        {menuOpen && (
-          <nav className="App-nav-overlay">
-            <ul>
-              <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-              <li><Link to="/page1" onClick={toggleMenu}>Page 1</Link></li>
-            </ul>
-          </nav>
-        )}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/page1" element={<Page1 />} />
-        </Routes>
+      <div id="root">
+        <div className="main-content">
+          <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <button className="App-menu-button" onClick={toggleMenu}>
+                ☰
+              </button>
+              <input type="text" className="App-search" placeholder="Search..." />
+            </header>
+            {menuOpen && (
+              <nav className="App-nav-overlay">
+                <ul>
+                  <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
+                  <li><Link to="/page1" onClick={toggleMenu}>Page 1</Link></li>
+                </ul>
+              </nav>
+            )}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/page1" element={<Page1 />} />
+            </Routes>
+          </div>
+        </div>
         <footer className="App-footer">
           <p>&copy; 2025 My React App</p>
         </footer>
